@@ -11,7 +11,7 @@ import '../styles/index.css'
 const App = () => {
   // getters and setters in vanilla JS
   // using use state hooks in react js
-  const API_URL = 'http://localhost:3500/items';
+  const API_URL = 'https://react-list-server.herokuapp.com/items';
 
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState('');
