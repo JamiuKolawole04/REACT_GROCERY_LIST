@@ -16,6 +16,7 @@ const App = () => {
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState('');
   const [search, setSearch] = useState('');
+  const [searchItemList, setSearchItemList] = useState([]);
   const [fetchError, setFetchError] = useState(null);
   const [isLoading, setIsLoading] = useState(true)
 
@@ -44,6 +45,11 @@ const App = () => {
     }, 2000);
 
   }, []);
+
+  useEffect(() => {
+    const filterItems = items.filter(item => ((item.item).toLowerCase()).includes(search.toLocaleLowerCase()));
+    setSearchItemList(filterItems);
+  }, [items, search])
 
   // adding new items
   const addItem = async (item) => {
@@ -118,7 +124,7 @@ const App = () => {
         {isLoading && <p>Loading items...</p>}
         {fetchError && <p style={{ color: "red" }}>{`Error: ${fetchError}`}</p>}
         {!fetchError && !isLoading && <Content
-          items={items.filter(item => ((item.item).toLowerCase()).includes(search.toLocaleLowerCase()))}
+          items={searchItemList}
           handleCheck={handleCheck}
           handleDelete={handleDelete}
         />
